@@ -5,9 +5,9 @@
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
   <meta content="ED" name="w3c-status">
   <meta content="This document provides an explicit JavaScript API for interacting with WebAssembly." name="abstract">
-  <meta content="Bikeshed version b76a1f3caa65320a39ee72dbf2680ea887ace619" name="generator">
+  <meta content="Bikeshed version e083b97d279e61e6afd0a5513a243eb8c7d6df6c" name="generator">
   <link href="https://www.w3.org/TR/wasm-js-api-1/" rel="canonical">
-  <meta content="7ef87aeaec4352ced030ab25df1fd725192968c7" name="document-revision">
+  <meta content="11a48e69f51b947826db5969e7ebdf9178b98f84" name="document-revision">
 <style>
 emu-const {
     font-family: serif;
@@ -271,7 +271,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">WebAssembly JavaScript Interface</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2019-10-04">4 October 2019</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2019-10-16">16 October 2019</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1714,10 +1714,10 @@ In practice, an implementation may run out of resources for valid modules below 
     <li>The maximum number of exports declared in a module is 100000.
     <li>The maximum number of globals defined in a module is 1000000.
     <li>The maximum number of data segments defined in a module is 100000.
-    <li>The maximum number of tables, including declared or imported tables, is 1.
+    <li>The maximum number of tables, including defined and imported tables, is 1.
     <li>The maximum size of a table is 10000000.
     <li>The maximum number of table entries in any table initialization is 10000000.
-    <li>The maximum number of memories, including declared or imported memories, is 1.
+    <li>The maximum number of memories, including defined and imported memories, is 1.
     <li>The initial or maximum number of pages for any memory, declared or imported, is at most 32767.
     <li>The maximum number of parameters to any function is 1000.
     <li>The maximum number of return values for any function is 1.
@@ -2874,7 +2874,7 @@ In practice, an implementation may run out of resources for valid modules below 
   <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
    <dt id="biblio-ecmascript">[ECMASCRIPT]
-   <dd><a href="https://tc39.github.io/ecma262/">ECMAScript Language Specification</a>. URL: <a href="https://tc39.github.io/ecma262/">https://tc39.github.io/ecma262/</a>
+   <dd><a href="https://tc39.es/ecma262/">ECMAScript Language Specification</a>. URL: <a href="https://tc39.es/ecma262/">https://tc39.es/ecma262/</a>
    <dt id="biblio-encoding">[ENCODING]
    <dd>Anne van Kesteren. <a href="https://encoding.spec.whatwg.org/">Encoding Standard</a>. Living Standard. URL: <a href="https://encoding.spec.whatwg.org/">https://encoding.spec.whatwg.org/</a>
    <dt id="biblio-html">[HTML]
