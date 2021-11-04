@@ -5,10 +5,10 @@
   (memory $mem2 1)
 
   (func (export "load1") (param i32) (result i64)
-    (i64.load $mem1 (local.get 0))
+    (i64.load (memory $mem1) (local.get 0))
   )
   (func (export "load2") (param i32) (result i64)
-    (i64.load $mem2 (local.get 0))
+    (i64.load (memory $mem2) (local.get 0))
   )
 
   (data (memory $mem1) (i32.const 0) "\01")
@@ -36,10 +36,10 @@
   (data (memory $mem2) (i32.const 50) "\0A\0B\0C\0D\0E")
 
   (func (export "read1") (param i32) (result i32)
-    (i32.load8_u $mem1 (local.get 0))
+    (i32.load8_u (memory $mem1) (local.get 0))
   )
   (func (export "read2") (param i32) (result i32)
-    (i32.load8_u $mem2 (local.get 0))
+    (i32.load8_u (memory $mem2) (local.get 0))
   )
 )
 
