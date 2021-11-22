@@ -7,7 +7,7 @@
   <meta content="This document provides an explicit JavaScript API for interacting with WebAssembly." name="abstract">
   <meta content="Bikeshed version bbc364800, updated Mon Nov 15 13:57:55 2021 -0800" name="generator">
   <link href="https://www.w3.org/TR/wasm-js-api-1/" rel="canonical">
-  <meta content="5a8a2d92a45eda76a57219933416ddc91e609d4a" name="document-revision">
+  <meta content="21326c56b00cfd44c9b0c9869b57e3a751ecf7b8" name="document-revision">
 <style>
 emu-const {
     font-family: serif;
@@ -1953,28 +1953,10 @@ In practice, an implementation may run out of resources for valid modules below 
     <li>The maximum number of exports declared in a module is 100000.
     <li>The maximum number of globals defined in a module is 1000000.
     <li>The maximum number of data segments defined in a module is 100000.
-    <p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
-    <li>The maximum number of tables, including defined and imported tables, is 1.
-     ======= 
     <li>The maximum number of tables, including declared or imported tables, is 100000.
     <li>The maximum size of a table is 10000000.
-    <blockquote>
-     <blockquote>
-      <blockquote>
-       <blockquote>
-        <blockquote>
-         <blockquote>
-          <blockquote>
-           <p>reftype/master</p>
-          </blockquote>
-         </blockquote>
-        </blockquote>
-       </blockquote>
-      </blockquote>
-     </blockquote>
-    </blockquote>
     <li>The maximum number of table entries in any table initialization is 10000000.
-    <li>The maximum number of memories, including defined and imported memories, is 10000000.
+    <li>The maximum number of memories, including defined and imported memories, is 1.
     <li>The maximum number of parameters to any function or block is 1000.
     <li>The maximum number of return values for any function or block is 1000.
     <li>The maximum size of a function body, including locals declarations, is 7654321 bytes.
