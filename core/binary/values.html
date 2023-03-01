@@ -1,20 +1,21 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Values &#8212; WebAssembly 1.1 + multi-memory (Draft 2022-08-23)</title>
+    <title>Values &#8212; WebAssembly 2.0 + multi-memory (Draft 2023-03-01)</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"tex": {"maxBuffer": 30720}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Types" href="types.html" />
@@ -69,12 +70,12 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="documentwrapper">
@@ -84,73 +85,73 @@
           <div class="body" role="main">
             
   <section id="values">
-<span id="binary-value"></span><span id="index-0"></span><h1>Values<a class="headerlink" href="#values" title="Permalink to this headline">¶</a></h1>
+<span id="binary-value"></span><span id="index-0"></span><h1>Values<a class="headerlink" href="#values" title="Permalink to this heading">¶</a></h1>
 <section id="bytes">
-<span id="binary-byte"></span><span id="index-1"></span><h2>Bytes<a class="headerlink" href="#bytes" title="Permalink to this headline">¶</a></h2>
+<span id="binary-byte"></span><span id="index-1"></span><h2>Bytes<a class="headerlink" href="#bytes" title="Permalink to this heading">¶</a></h2>
 <p><a class="reference internal" href="../syntax/values.html#syntax-byte"><span class="std std-ref">Bytes</span></a> encode themselves.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{llcll&#64;{\qquad}l}
-\def\mathdef1871#1{{}}\mathdef1871{byte} &amp; \href{../binary/values.html#binary-byte}{\mathtt{byte}} &amp;::=&amp;
-  \def\mathdef1910#1{\mathtt{0x#1}}\mathdef1910{00} &amp;\Rightarrow&amp; \def\mathdef1911#1{\mathtt{0x#1}}\mathdef1911{00} \\ &amp;&amp;|&amp;&amp;
+\def\mathdef1960#1{{}}\mathdef1960{byte} &amp; \href{../binary/values.html#binary-byte}{\mathtt{byte}} &amp;::=&amp;
+  \def\mathdef1999#1{\mathtt{0x#1}}\mathdef1999{00} &amp;\Rightarrow&amp; \def\mathdef2000#1{\mathtt{0x#1}}\mathdef2000{00} \\ &amp;&amp;|&amp;&amp;
   \dots \\ &amp;&amp;|&amp;
-  \def\mathdef1912#1{\mathtt{0x#1}}\mathdef1912{FF} &amp;\Rightarrow&amp; \def\mathdef1913#1{\mathtt{0x#1}}\mathdef1913{FF} \\
+  \def\mathdef2001#1{\mathtt{0x#1}}\mathdef2001{FF} &amp;\Rightarrow&amp; \def\mathdef2002#1{\mathtt{0x#1}}\mathdef2002{FF} \\
 \end{array}\end{split}\]</div>
 </section>
 <section id="integers">
-<span id="binary-int"></span><span id="binary-uint"></span><span id="binary-sint"></span><span id="index-2"></span><h2>Integers<a class="headerlink" href="#integers" title="Permalink to this headline">¶</a></h2>
+<span id="binary-int"></span><span id="binary-uint"></span><span id="binary-sint"></span><span id="index-2"></span><h2>Integers<a class="headerlink" href="#integers" title="Permalink to this heading">¶</a></h2>
 <p>All <a class="reference internal" href="../syntax/values.html#syntax-int"><span class="std std-ref">integers</span></a> are encoded using the <a class="reference external" href="https://en.wikipedia.org/wiki/LEB128">LEB128</a> variable-length integer encoding, in either unsigned or signed variant.</p>
 <p><a class="reference internal" href="../syntax/values.html#syntax-uint"><span class="std std-ref">Unsigned integers</span></a> are encoded in <a class="reference external" href="https://en.wikipedia.org/wiki/LEB128#Unsigned_LEB128">unsigned LEB128</a> format.
 As an additional constraint, the total number of bytes encoding a value of type <span class="math notranslate nohighlight">\(\href{../syntax/values.html#syntax-int}{\mathit{u}N}\)</span> must not exceed <span class="math notranslate nohighlight">\(\mathrm{ceil}(N/7)\)</span> bytes.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{llclll&#64;{\qquad}l}
-\def\mathdef1871#1{{}}\mathdef1871{unsigned integer} &amp; \href{../binary/values.html#binary-int}{\def\mathdef1872#1{{\mathtt{u}#1}}\mathdef1872{N}} &amp;::=&amp;
+\def\mathdef1960#1{{}}\mathdef1960{unsigned integer} &amp; \href{../binary/values.html#binary-int}{\def\mathdef1961#1{{\mathtt{u}#1}}\mathdef1961{N}} &amp;::=&amp;
   n{:}\href{../binary/values.html#binary-byte}{\mathtt{byte}} &amp;\Rightarrow&amp; n &amp; (\mathrel{\mbox{if}} n &lt; 2^7 \wedge n &lt; 2^N) \\ &amp;&amp;|&amp;
-  n{:}\href{../binary/values.html#binary-byte}{\mathtt{byte}}~~m{:}\def\mathdef1914#1{{\mathtt{u}#1}}\mathdef1914{(N\mathtt{-7})} &amp;\Rightarrow&amp;
+  n{:}\href{../binary/values.html#binary-byte}{\mathtt{byte}}~~m{:}\def\mathdef2003#1{{\mathtt{u}#1}}\mathdef2003{(N\mathtt{-7})} &amp;\Rightarrow&amp;
     2^7\cdot m + (n-2^7) &amp; (\mathrel{\mbox{if}} n \geq 2^7 \wedge N &gt; 7) \\
 \end{array}\end{split}\]</div>
 <p><a class="reference internal" href="../syntax/values.html#syntax-sint"><span class="std std-ref">Signed integers</span></a> are encoded in <a class="reference external" href="https://en.wikipedia.org/wiki/LEB128#Signed_LEB128">signed LEB128</a> format, which uses a two’s complement representation.
 As an additional constraint, the total number of bytes encoding a value of type <span class="math notranslate nohighlight">\(\href{../syntax/values.html#syntax-int}{\mathit{s}N}\)</span> must not exceed <span class="math notranslate nohighlight">\(\mathrm{ceil}(N/7)\)</span> bytes.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{llclll&#64;{\qquad}l}
-\def\mathdef1871#1{{}}\mathdef1871{signed integer} &amp; \href{../binary/values.html#binary-int}{\def\mathdef1878#1{{\mathtt{s}#1}}\mathdef1878{N}} &amp;::=&amp;
+\def\mathdef1960#1{{}}\mathdef1960{signed integer} &amp; \href{../binary/values.html#binary-int}{\def\mathdef1967#1{{\mathtt{s}#1}}\mathdef1967{N}} &amp;::=&amp;
   n{:}\href{../binary/values.html#binary-byte}{\mathtt{byte}} &amp;\Rightarrow&amp; n &amp; (\mathrel{\mbox{if}} n &lt; 2^6 \wedge n &lt; 2^{N-1}) \\ &amp;&amp;|&amp;
   n{:}\href{../binary/values.html#binary-byte}{\mathtt{byte}} &amp;\Rightarrow&amp; n-2^7 &amp; (\mathrel{\mbox{if}} 2^6 \leq n &lt; 2^7 \wedge n \geq 2^7-2^{N-1}) \\ &amp;&amp;|&amp;
-  n{:}\href{../binary/values.html#binary-byte}{\mathtt{byte}}~~m{:}\def\mathdef1915#1{{\mathtt{s}#1}}\mathdef1915{(N\mathtt{-7})} &amp;\Rightarrow&amp;
+  n{:}\href{../binary/values.html#binary-byte}{\mathtt{byte}}~~m{:}\def\mathdef2004#1{{\mathtt{s}#1}}\mathdef2004{(N\mathtt{-7})} &amp;\Rightarrow&amp;
     2^7\cdot m + (n-2^7) &amp; (\mathrel{\mbox{if}} n \geq 2^7 \wedge N &gt; 7) \\
 \end{array}\end{split}\]</div>
 <p><a class="reference internal" href="../syntax/values.html#syntax-int"><span class="std std-ref">Uninterpreted integers</span></a> are encoded as signed integers.</p>
 <div class="math notranslate nohighlight">
 \[\begin{array}{llclll&#64;{\qquad\qquad}l}
-\def\mathdef1871#1{{}}\mathdef1871{uninterpreted integer} &amp; \href{../binary/values.html#binary-int}{\def\mathdef1883#1{{\mathtt{i}#1}}\mathdef1883{N}} &amp;::=&amp;
-  n{:}\href{../binary/values.html#binary-int}{\def\mathdef1878#1{{\mathtt{s}#1}}\mathdef1878{N}} &amp;\Rightarrow&amp; i &amp; (\mathrel{\mbox{if}} n = \href{../exec/numerics.html#aux-signed}{\mathrm{signed}}_{\href{../syntax/values.html#syntax-int}{\mathit{i}N}}(i))
+\def\mathdef1960#1{{}}\mathdef1960{uninterpreted integer} &amp; \href{../binary/values.html#binary-int}{\def\mathdef1972#1{{\mathtt{i}#1}}\mathdef1972{N}} &amp;::=&amp;
+  n{:}\href{../binary/values.html#binary-int}{\def\mathdef1967#1{{\mathtt{s}#1}}\mathdef1967{N}} &amp;\Rightarrow&amp; i &amp; (\mathrel{\mbox{if}} n = \href{../exec/numerics.html#aux-signed}{\mathrm{signed}}_N(i))
 \end{array}\]</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The side conditions <span class="math notranslate nohighlight">\(N &gt; 7\)</span> in the productions for non-terminal bytes of the <span class="math notranslate nohighlight">\(\def\mathdef1916#1{{\mathit{u#1}}}\mathdef1916{}\)</span> and <span class="math notranslate nohighlight">\(\def\mathdef1917#1{{\mathit{s#1}}}\mathdef1917{}\)</span> encodings restrict the encoding’s length.
+<p>The side conditions <span class="math notranslate nohighlight">\(N &gt; 7\)</span> in the productions for non-terminal bytes of the <span class="math notranslate nohighlight">\(\def\mathdef2005#1{{\mathit{u#1}}}\mathdef2005{}\)</span> and <span class="math notranslate nohighlight">\(\def\mathdef2006#1{{\mathit{s#1}}}\mathdef2006{}\)</span> encodings restrict the encoding’s length.
 However, “trailing zeros” are still allowed within these bounds.
-For example, <span class="math notranslate nohighlight">\(\def\mathdef1918#1{\mathtt{0x#1}}\mathdef1918{03}\)</span> and <span class="math notranslate nohighlight">\(\def\mathdef1919#1{\mathtt{0x#1}}\mathdef1919{83}~\def\mathdef1920#1{\mathtt{0x#1}}\mathdef1920{00}\)</span> are both well-formed encodings for the value <span class="math notranslate nohighlight">\(3\)</span> as a <span class="math notranslate nohighlight">\(\href{../syntax/values.html#syntax-int}{\mathit{u8}}\)</span>.
-Similarly, either of <span class="math notranslate nohighlight">\(\def\mathdef1921#1{\mathtt{0x#1}}\mathdef1921{7e}\)</span> and <span class="math notranslate nohighlight">\(\def\mathdef1922#1{\mathtt{0x#1}}\mathdef1922{FE}~\def\mathdef1923#1{\mathtt{0x#1}}\mathdef1923{7F}\)</span> and <span class="math notranslate nohighlight">\(\def\mathdef1924#1{\mathtt{0x#1}}\mathdef1924{FE}~\def\mathdef1925#1{\mathtt{0x#1}}\mathdef1925{FF}~\def\mathdef1926#1{\mathtt{0x#1}}\mathdef1926{7F}\)</span> are well-formed encodings of the value <span class="math notranslate nohighlight">\(-2\)</span> as a <span class="math notranslate nohighlight">\(\href{../syntax/values.html#syntax-int}{\mathit{s16}}\)</span>.</p>
+For example, <span class="math notranslate nohighlight">\(\def\mathdef2007#1{\mathtt{0x#1}}\mathdef2007{03}\)</span> and <span class="math notranslate nohighlight">\(\def\mathdef2008#1{\mathtt{0x#1}}\mathdef2008{83}~\def\mathdef2009#1{\mathtt{0x#1}}\mathdef2009{00}\)</span> are both well-formed encodings for the value <span class="math notranslate nohighlight">\(3\)</span> as a <span class="math notranslate nohighlight">\(\href{../syntax/values.html#syntax-int}{\mathit{u8}}\)</span>.
+Similarly, either of <span class="math notranslate nohighlight">\(\def\mathdef2010#1{\mathtt{0x#1}}\mathdef2010{7e}\)</span> and <span class="math notranslate nohighlight">\(\def\mathdef2011#1{\mathtt{0x#1}}\mathdef2011{FE}~\def\mathdef2012#1{\mathtt{0x#1}}\mathdef2012{7F}\)</span> and <span class="math notranslate nohighlight">\(\def\mathdef2013#1{\mathtt{0x#1}}\mathdef2013{FE}~\def\mathdef2014#1{\mathtt{0x#1}}\mathdef2014{FF}~\def\mathdef2015#1{\mathtt{0x#1}}\mathdef2015{7F}\)</span> are well-formed encodings of the value <span class="math notranslate nohighlight">\(-2\)</span> as a <span class="math notranslate nohighlight">\(\href{../syntax/values.html#syntax-int}{\mathit{s16}}\)</span>.</p>
 <p>The side conditions on the value <span class="math notranslate nohighlight">\(n\)</span> of terminal bytes further enforce that
 any unused bits in these bytes must be <span class="math notranslate nohighlight">\(0\)</span> for positive values and <span class="math notranslate nohighlight">\(1\)</span> for negative ones.
-For example, <span class="math notranslate nohighlight">\(\def\mathdef1927#1{\mathtt{0x#1}}\mathdef1927{83}~\def\mathdef1928#1{\mathtt{0x#1}}\mathdef1928{10}\)</span> is malformed as a <span class="math notranslate nohighlight">\(\href{../syntax/values.html#syntax-int}{\mathit{u8}}\)</span> encoding.
-Similarly, both <span class="math notranslate nohighlight">\(\def\mathdef1929#1{\mathtt{0x#1}}\mathdef1929{83}~\def\mathdef1930#1{\mathtt{0x#1}}\mathdef1930{3E}\)</span> and <span class="math notranslate nohighlight">\(\def\mathdef1931#1{\mathtt{0x#1}}\mathdef1931{FF}~\def\mathdef1932#1{\mathtt{0x#1}}\mathdef1932{7B}\)</span> are malformed as <span class="math notranslate nohighlight">\(\href{../syntax/values.html#syntax-int}{\mathit{s8}}\)</span> encodings.</p>
+For example, <span class="math notranslate nohighlight">\(\def\mathdef2016#1{\mathtt{0x#1}}\mathdef2016{83}~\def\mathdef2017#1{\mathtt{0x#1}}\mathdef2017{10}\)</span> is malformed as a <span class="math notranslate nohighlight">\(\href{../syntax/values.html#syntax-int}{\mathit{u8}}\)</span> encoding.
+Similarly, both <span class="math notranslate nohighlight">\(\def\mathdef2018#1{\mathtt{0x#1}}\mathdef2018{83}~\def\mathdef2019#1{\mathtt{0x#1}}\mathdef2019{3E}\)</span> and <span class="math notranslate nohighlight">\(\def\mathdef2020#1{\mathtt{0x#1}}\mathdef2020{FF}~\def\mathdef2021#1{\mathtt{0x#1}}\mathdef2021{7B}\)</span> are malformed as <span class="math notranslate nohighlight">\(\href{../syntax/values.html#syntax-int}{\mathit{s8}}\)</span> encodings.</p>
 </div>
 </section>
 <section id="floating-point">
-<span id="binary-float"></span><span id="index-3"></span><h2>Floating-Point<a class="headerlink" href="#floating-point" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="../syntax/values.html#syntax-float"><span class="std std-ref">Floating-point</span></a> values are encoded directly by their <a class="reference external" href="https://ieeexplore.ieee.org/document/8766229">IEEE 754-2019</a> (Section 3.4) bit pattern in <a class="reference external" href="https://en.wikipedia.org/wiki/Endianness#Little-endian">little endian</a> byte order:</p>
+<span id="binary-float"></span><span id="index-3"></span><h2>Floating-Point<a class="headerlink" href="#floating-point" title="Permalink to this heading">¶</a></h2>
+<p><a class="reference internal" href="../syntax/values.html#syntax-float"><span class="std std-ref">Floating-point</span></a> values are encoded directly by their <a class="reference external" href="https://ieeexplore.ieee.org/document/8766229">IEEE 754</a> (Section 3.4) bit pattern in <a class="reference external" href="https://en.wikipedia.org/wiki/Endianness#Little-endian">little endian</a> byte order:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{llclll&#64;{\qquad\qquad}l}
-\def\mathdef1871#1{{}}\mathdef1871{floating-point value} &amp; \href{../binary/values.html#binary-float}{\def\mathdef1886#1{{\mathtt{f}#1}}\mathdef1886{N}} &amp;::=&amp;
+\def\mathdef1960#1{{}}\mathdef1960{floating-point value} &amp; \href{../binary/values.html#binary-float}{\def\mathdef1975#1{{\mathtt{f}#1}}\mathdef1975{N}} &amp;::=&amp;
   b^\ast{:\,}\href{../binary/values.html#binary-byte}{\mathtt{byte}}^{N/8} &amp;\Rightarrow&amp; \href{../exec/numerics.html#aux-bytes}{\mathrm{bytes}}_{\href{../syntax/values.html#syntax-float}{\mathit{f}N}}^{-1}(b^\ast) \\
 \end{array}\end{split}\]</div>
 </section>
 <section id="names">
-<span id="binary-name"></span><span id="binary-utf8"></span><span id="index-4"></span><h2>Names<a class="headerlink" href="#names" title="Permalink to this headline">¶</a></h2>
+<span id="binary-name"></span><span id="binary-utf8"></span><span id="index-4"></span><h2>Names<a class="headerlink" href="#names" title="Permalink to this heading">¶</a></h2>
 <p><a class="reference internal" href="../syntax/values.html#syntax-name"><span class="std std-ref">Names</span></a> are encoded as a <a class="reference internal" href="conventions.html#binary-vec"><span class="std std-ref">vector</span></a> of bytes containing the <a class="reference external" href="https://www.unicode.org/versions/latest/">Unicode</a> (Section 3.9) UTF-8 encoding of the name’s character sequence.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{llclllll}
-\def\mathdef1871#1{{}}\mathdef1871{name} &amp; \href{../binary/values.html#binary-name}{\mathtt{name}} &amp;::=&amp;
+\def\mathdef1960#1{{}}\mathdef1960{name} &amp; \href{../binary/values.html#binary-name}{\mathtt{name}} &amp;::=&amp;
   b^\ast{:}\href{../binary/conventions.html#binary-vec}{\mathtt{vec}}(\href{../binary/values.html#binary-byte}{\mathtt{byte}}) &amp;\Rightarrow&amp; \href{../syntax/values.html#syntax-name}{\mathit{name}}
     &amp;&amp; (\mathrel{\mbox{if}} \href{../binary/values.html#binary-utf8}{\mathrm{utf8}}(\href{../syntax/values.html#syntax-name}{\mathit{name}}) = b^\ast) \\
 \end{array}\end{split}\]</div>
@@ -161,26 +162,26 @@ Similarly, both <span class="math notranslate nohighlight">\(\def\mathdef1929#1{
 \href{../binary/values.html#binary-utf8}{\mathrm{utf8}}(c^\ast) &amp;=&amp; (\href{../binary/values.html#binary-utf8}{\mathrm{utf8}}(c))^\ast \\[1ex]
 \href{../binary/values.html#binary-utf8}{\mathrm{utf8}}(c) &amp;=&amp; b &amp;
   (\begin{array}[t]{&#64;{}c&#64;{~}l&#64;{}}
-   \mathrel{\mbox{if}} &amp; c &lt; \def\mathdef1933#1{\mathrm{U{+}#1}}\mathdef1933{80} \\
+   \mathrel{\mbox{if}} &amp; c &lt; \def\mathdef2022#1{\mathrm{U{+}#1}}\mathdef2022{80} \\
    \wedge &amp; c = b) \\
    \end{array} \\
 \href{../binary/values.html#binary-utf8}{\mathrm{utf8}}(c) &amp;=&amp; b_1~b_2 &amp;
   (\begin{array}[t]{&#64;{}c&#64;{~}l&#64;{}}
-   \mathrel{\mbox{if}} &amp; \def\mathdef1934#1{\mathrm{U{+}#1}}\mathdef1934{80} \leq c &lt; \def\mathdef1935#1{\mathrm{U{+}#1}}\mathdef1935{800} \\
-   \wedge &amp; c = 2^6(b_1-\def\mathdef1936#1{\mathtt{0x#1}}\mathdef1936{C0})+(b_2-\def\mathdef1937#1{\mathtt{0x#1}}\mathdef1937{80})) \\
+   \mathrel{\mbox{if}} &amp; \def\mathdef2023#1{\mathrm{U{+}#1}}\mathdef2023{80} \leq c &lt; \def\mathdef2024#1{\mathrm{U{+}#1}}\mathdef2024{800} \\
+   \wedge &amp; c = 2^6(b_1-\def\mathdef2025#1{\mathtt{0x#1}}\mathdef2025{C0})+(b_2-\def\mathdef2026#1{\mathtt{0x#1}}\mathdef2026{80})) \\
    \end{array} \\
 \href{../binary/values.html#binary-utf8}{\mathrm{utf8}}(c) &amp;=&amp; b_1~b_2~b_3 &amp;
   (\begin{array}[t]{&#64;{}c&#64;{~}l&#64;{}}
-   \mathrel{\mbox{if}} &amp; \def\mathdef1938#1{\mathrm{U{+}#1}}\mathdef1938{800} \leq c &lt; \def\mathdef1939#1{\mathrm{U{+}#1}}\mathdef1939{D800} \vee \def\mathdef1940#1{\mathrm{U{+}#1}}\mathdef1940{E000} \leq c &lt; \def\mathdef1941#1{\mathrm{U{+}#1}}\mathdef1941{10000} \\
-   \wedge &amp; c = 2^{12}(b_1-\def\mathdef1942#1{\mathtt{0x#1}}\mathdef1942{E0})+2^6(b_2-\def\mathdef1943#1{\mathtt{0x#1}}\mathdef1943{80})+(b_3-\def\mathdef1944#1{\mathtt{0x#1}}\mathdef1944{80})) \\
+   \mathrel{\mbox{if}} &amp; \def\mathdef2027#1{\mathrm{U{+}#1}}\mathdef2027{800} \leq c &lt; \def\mathdef2028#1{\mathrm{U{+}#1}}\mathdef2028{D800} \vee \def\mathdef2029#1{\mathrm{U{+}#1}}\mathdef2029{E000} \leq c &lt; \def\mathdef2030#1{\mathrm{U{+}#1}}\mathdef2030{10000} \\
+   \wedge &amp; c = 2^{12}(b_1-\def\mathdef2031#1{\mathtt{0x#1}}\mathdef2031{E0})+2^6(b_2-\def\mathdef2032#1{\mathtt{0x#1}}\mathdef2032{80})+(b_3-\def\mathdef2033#1{\mathtt{0x#1}}\mathdef2033{80})) \\
    \end{array} \\
 \href{../binary/values.html#binary-utf8}{\mathrm{utf8}}(c) &amp;=&amp; b_1~b_2~b_3~b_4 &amp;
   (\begin{array}[t]{&#64;{}c&#64;{~}l&#64;{}}
-   \mathrel{\mbox{if}} &amp; \def\mathdef1945#1{\mathrm{U{+}#1}}\mathdef1945{10000} \leq c &lt; \def\mathdef1946#1{\mathrm{U{+}#1}}\mathdef1946{110000} \\
-   \wedge &amp; c = 2^{18}(b_1-\def\mathdef1947#1{\mathtt{0x#1}}\mathdef1947{F0})+2^{12}(b_2-\def\mathdef1948#1{\mathtt{0x#1}}\mathdef1948{80})+2^6(b_3-\def\mathdef1949#1{\mathtt{0x#1}}\mathdef1949{80})+(b_4-\def\mathdef1950#1{\mathtt{0x#1}}\mathdef1950{80})) \\
+   \mathrel{\mbox{if}} &amp; \def\mathdef2034#1{\mathrm{U{+}#1}}\mathdef2034{10000} \leq c &lt; \def\mathdef2035#1{\mathrm{U{+}#1}}\mathdef2035{110000} \\
+   \wedge &amp; c = 2^{18}(b_1-\def\mathdef2036#1{\mathtt{0x#1}}\mathdef2036{F0})+2^{12}(b_2-\def\mathdef2037#1{\mathtt{0x#1}}\mathdef2037{80})+2^6(b_3-\def\mathdef2038#1{\mathtt{0x#1}}\mathdef2038{80})+(b_4-\def\mathdef2039#1{\mathtt{0x#1}}\mathdef2039{80})) \\
    \end{array} \\
 \end{array} \\
-\mathrel{\mbox{where}} b_2, b_3, b_4 &lt; \def\mathdef1951#1{\mathtt{0x#1}}\mathdef1951{C0} \\
+\mathrel{\mbox{where}} b_2, b_3, b_4 &lt; \def\mathdef2040#1{\mathtt{0x#1}}\mathdef2040{C0} \\
 \end{array}\end{split}\]</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -197,7 +198,7 @@ Similarly, both <span class="math notranslate nohighlight">\(\def\mathdef1929#1{
     <div class="clearer"></div>
   </div>
     <div class="footer">
-      &copy;2017, WebAssembly Community Group.
+      &copy;2022, WebAssembly Community Group.
       
     </div>
 
