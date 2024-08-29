@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Modules &#8212; WebAssembly 2.0 + multi-memory (Draft 2024-07-31)</title>
+    <title>Modules &#8212; WebAssembly 2.0 + multi-memory (Draft 2024-08-29)</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -116,7 +116,7 @@ except that <a class="reference internal" href="../syntax/modules.html#syntax-fu
 <ul class="simple">
 <li><p>a one-byte section <em>id</em>,</p></li>
 <li><p>the <span class="math notranslate nohighlight">\(\href{../syntax/values.html#syntax-int}{\mathit{u32}}\)</span> <em>size</em> of the contents, in bytes,</p></li>
-<li><p>the actual <em>contents</em>, whose structure is depended on the section id.</p></li>
+<li><p>the actual <em>contents</em>, whose structure is dependent on the section id.</p></li>
 </ul>
 <p>Every section is optional; an omitted section is equivalent to the section being present with empty contents.</p>
 <p>The following parameterized grammar rule defines the generic structure of a section with id <span class="math notranslate nohighlight">\(N\)</span> and contents described by the grammar <span class="math notranslate nohighlight">\(\mathtt{B}\)</span>.</p>
@@ -184,6 +184,10 @@ The module is malformed if the size does not match the length of the binary cont
 </tr>
 </tbody>
 </table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Section ids do not always correspond to the <a class="reference internal" href="#binary-module"><span class="std std-ref">order of sections</span></a> in the encoding of a module.</p>
+</div>
 </section>
 <section id="custom-section">
 <span id="binary-customsec"></span><span id="index-2"></span><h2>Custom Section<a class="headerlink" href="#custom-section" title="Permalink to this heading">¶</a></h2>
@@ -347,7 +351,7 @@ It decodes into a vector of <a class="reference internal" href="../syntax/module
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The initial integer can be interpreted as a bitfield.
-Bit 0 indicates a passive or declarative segment,
+Bit 0 distinguishes a passive or declarative segment from an active segment,
 bit 1 indicates the presence of an explicit table index for an active segment and otherwise distinguishes passive from declarative segments,
 bit 2 indicates the use of element type and element <a class="reference internal" href="instructions.html#binary-expr"><span class="std std-ref">expressions</span></a> instead of element kind and element indices.</p>
 <p>Additional element kinds may be added in future versions of WebAssembly.</p>
